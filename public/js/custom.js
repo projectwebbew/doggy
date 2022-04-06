@@ -10,7 +10,4 @@ linkCheck.each(function (index, element) {
     }
 
 })
-let v =44+909099;
-let a =88;
-let bb=00;
-git
+let vv=000;
