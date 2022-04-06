@@ -10,3 +10,4 @@ linkCheck.each(function (index, element) {
     }
 
 })
+$a=21;
