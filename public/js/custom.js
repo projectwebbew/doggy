@@ -10,4 +10,4 @@ linkCheck.each(function (index, element) {
     }
 
 })
-let vv=000;
+
