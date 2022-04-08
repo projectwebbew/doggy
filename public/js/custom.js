@@ -1,5 +1,5 @@
 
-let linkCheck = $('.form-check-input');
+let linkCheck = $('.form-check-input').add();
 let formCheck = $('.checkBoxForm');
 linkCheck.click(function (e) {
     formCheck.submit();
