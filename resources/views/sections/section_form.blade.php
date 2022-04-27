@@ -1,46 +1,62 @@
 <section class="section_form">
-    <div class="container py-4">
+    <div class="container col-md-4">
 
         <!-- Bootstrap 5 starter form -->
-        <form id="contactForm" data-sb-form-api-token="API_TOKEN">
-
-            <!-- Name input -->
-            <div class="mb-3">
-                <label class="form-label" for="name">Name</label>
-                <input class="form-control" id="name" type="text" placeholder="Name" data-sb-validations="required" />
-                <div class="invalid-feedback" data-sb-feedback="name:required">Name is required.</div>
+        <form method="post" action="{{ route('contact') }}">
+            @csrf
+            <div class="form-group">
+                <label>Name</label>
+                <input type="text" class="form-control {{ $errors->has('name') ? 'error' : '' }}" name="name"
+                       id="name">
+                <!-- Error -->
+                @if ($errors->has('name'))
+                    <div class="error">
+                        {{ $errors->first('name') }}
+                    </div>
+                @endif
             </div>
-
-            <!-- Email address input -->
-            <div class="mb-3">
-                <label class="form-label" for="emailAddress">Email Address</label>
-                <input class="form-control" id="emailAddress" type="email" placeholder="Email Address" data-sb-validations="required, email" />
-                <div class="invalid-feedback" data-sb-feedback="emailAddress:required">Email Address is required.</div>
-                <div class="invalid-feedback" data-sb-feedback="emailAddress:email">Email Address Email is not valid.</div>
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" class="form-control {{ $errors->has('email') ? 'error' : '' }}" name="email"
+                       id="email">
+                @if ($errors->has('email'))
+                    <div class="error">
+                        {{ $errors->first('email') }}
+                    </div>
+                @endif
             </div>
-
-            <!-- Message input -->
-            <div class="mb-3">
-                <label class="form-label" for="message">Message</label>
-                <textarea class="form-control" id="message" type="text" placeholder="Message" style="height: 10rem;" data-sb-validations="required"></textarea>
-                <div class="invalid-feedback" data-sb-feedback="message:required">Message is required.</div>
+            <div class="form-group">
+                <label>Phone</label>
+                <input type="text" class="form-control {{ $errors->has('phone') ? 'error' : '' }}" name="phone"
+                       id="phone">
+                @if ($errors->has('phone'))
+                    <div class="error">
+                        {{ $errors->first('phone') }}
+                    </div>
+                @endif
             </div>
-
-            <!-- Form submissions success message -->
-            <div class="d-none" id="submitSuccessMessage">
-                <div class="text-center mb-3">Form submission successful!</div>
+            <div class="form-group">
+                <label>Subject</label>
+                <input type="text" class="form-control {{ $errors->has('subject') ? 'error' : '' }}" name="subject"
+                       id="subject">
+                @if ($errors->has('subject'))
+                    <div class="error">
+                        {{ $errors->first('subject') }}
+                    </div>
+                @endif
             </div>
-
-            <!-- Form submissions error message -->
-            <div class="d-none" id="submitErrorMessage">
-                <div class="text-center text-danger mb-3">Error sending message!</div>
+            <div class="form-group">
+                <label>Message</label>
+                <textarea class="form-control {{ $errors->has('message') ? 'error' : '' }}" name="message"
+                          id="message"
+                          rows="4"></textarea>
+                @if ($errors->has('message'))
+                    <div class="error">
+                        {{ $errors->first('message') }}
+                    </div>
+                @endif
             </div>
-
-            <!-- Form submit button -->
-            <div class="d-grid">
-                <button class="btn btn-primary btn-lg disabled" id="submitButton" type="submit">Submit</button>
-            </div>
-
+            <input type="submit" name="send" value="Submit" class="btn btn-dark btn-block">
         </form>
 
     </div>

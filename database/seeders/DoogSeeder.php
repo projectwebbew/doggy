@@ -15,6 +15,7 @@ class DoogSeeder extends Seeder
     public function run()
     {
 
+
         Dog::factory ()->count (20)->create ();
 
     }

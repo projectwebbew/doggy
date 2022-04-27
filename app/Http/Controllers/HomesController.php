@@ -2,26 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Filters\DogFilter;
 use App\Models\Dog;
 use App\Models\Home;
 use Illuminate\Http\Request;
 
 class HomesController extends Controller
 {
-    public function index (Request $request, Dog $dog)
+    public function index (DogFilter $dogFilter, Dog $dog)
     {
-
-        if (!empty($request->category_id_female) || !empty($request->category_id_male)) {
             $dogs = Dog::query ()
-                ->sort($request)
-                ->where ('gender', '=', $request->category_id_female)
-                ->orWhere ('gender', '=', $request->category_id_male)
+                ->filter($dogFilter)
                 ->paginate (6);
             return view ('header', ['dogs' => $dogs]);
-        } else
-            $dogs = Dog::query ()->paginate (6);
-
-        return view ('header', ['dogs' => $dogs]);
     }
 
     public function create ()
@@ -45,8 +38,19 @@ class HomesController extends Controller
     }
 
     public function update (Request $request, Home $home)
+
     {
-        //
+
+
+        if($request->id and $request->quantity)
+        {
+            $cart = session()->get('cart');
+            $cart[$request->id]["quantity"] = $request->quantity;
+            session()->put('cart', $cart);
+            session()->flash('success', 'Cart updated successfully');
+        }
+
+
     }
 
     public function destroy (Home $home)
@@ -57,6 +61,61 @@ class HomesController extends Controller
     public function dog (Request $request)
     {
         return $request;
+    }
+    public function cart()
+    {
+        return view('basket.basket');
+    }
+    public function addToCart($id)
+    {
+        $product = Dog::find($id);
+        if(!$product) {
+            abort(404);
+        }
+
+        $cart = session()->get('cart');
+        // if cart is empty then this the first product
+        if(!$cart) {
+            $cart = [
+                $id => [
+                    "id" => $product->id,
+                    "name" => $product->name,
+                    "quantity" => 1,
+                    "price" => $product->price,
+                    "image" => $product->image
+                ]
+            ];
+            session()->put('cart', $cart);
+            return redirect()->back()->with('success', 'Product added to cart successfully!');
+        }
+        // if cart not empty then check if this product exist then increment quantity
+        if(isset($cart[$id])) {
+            $cart[$id]['quantity']++;
+            session()->put('cart', $cart);
+            return redirect()->back()->with('success', 'Product added to cart successfully!');
+        }
+        // if item not exist in cart then add to cart with quantity = 1
+        $cart[$id] = [
+            "id" => $product->id,
+            "name" => $product->name,
+            "quantity" => 1,
+            "price" => $product->price,
+            "image" => $product->image
+        ];
+        session()->put('cart', $cart);
+        return redirect()->back()->with('success', 'Product added to cart successfully!');
+    }
+
+    public function remove(Request $request)
+    {
+        if($request->id) {
+            $cart = session()->get('cart');
+            if(isset($cart[$request->id])) {
+                unset($cart[$request->id]);
+                session()->put('cart', $cart);
+            }
+            session()->flash('success', 'Product removed successfully');
+        }
     }
 
 }

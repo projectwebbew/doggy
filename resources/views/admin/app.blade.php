@@ -17,6 +17,7 @@
     <!-- Main styles for this application-->
     <link href={{ asset ('adminpanel/css/style.css')}} rel="stylesheet">
     <link href={{ asset ('adminpanel/vendors/pace-progress/css/pace.min.css')}} rel="stylesheet">
+    <link rel="stylesheet" href="{{asset('select2/css/select2.min.css')}}"> <!-- //Подключение select2-->
     <!-- Global site tag (gtag.js) - Google Analytics-->
     <script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-118965717-3"></script>
     <script>
@@ -148,7 +149,16 @@
 <script src={{ asset ('adminpanel/vendors/perfect-scrollbar/js/perfect-scrollbar.min.js')}}></script>
 <script src={{ asset ('adminpanel/vendors/@coreui/coreui/js/coreui.min.js')}}></script>
 <!-- Plugins and scripts required by this view-->
+<script src="{{ asset('adminpanel/vendors/bootstrap-select/js') }}"></script>
+
 <script src={{ asset ('adminpanel/vendors/chart.js/js/Chart.min.js')}}></script>
 <script src={{ asset ('adminpanel/vendors/@coreui/coreui-plugin-chartjs-custom-tooltips/js/custom-tooltips.min.js')}}></script>
 <script src={{ asset ('adminpanel/js/main.js')}}></script>
+
+<script src="{{asset('/select2/js/select2.min.js')}}"></script>
+<script>
+    $(function () {
+        $('.select2').select2();
+    });
+</script>
 </body>

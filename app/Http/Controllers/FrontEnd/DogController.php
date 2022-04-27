@@ -11,6 +11,6 @@ class DogController extends Controller
     public function index (Dog $dog)
     {
 
-        return view ('sections.section_slider', compact ('dog'));
+        return view ('item.section_slider', compact ('dog'));
     }
 }
