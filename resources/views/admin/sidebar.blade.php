@@ -60,6 +60,18 @@
                     </li>
                 </ul>
             </li>
+
+            {{--            Reviews--}}
+            <li class="nav-item nav-dropdown">
+                <a class="nav-link nav-dropdown-toggle" href="#">
+                    <i class="nav-icon icon-star"></i> Reviews</a>
+                <ul class="nav-dropdown-items">
+                    <li class="nav-item">
+                        <a class="nav-link" href={{ route ('reviews.index')}} target="_top">
+                            <i class="nav-icon icon-star"></i> All Reviews</a>
+                    </li>
+                </ul>
+            </li>
         </ul>
     </nav>
     <button class="sidebar-minimizer brand-minimizer" type="button"></button>

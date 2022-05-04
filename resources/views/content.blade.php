@@ -6,7 +6,7 @@
         @include('sections.section_pagination')
     </section>
     @include('sections.section_form')
-    <section class="reviews"></section>
+    @include('footer')
 
 @endsection
 

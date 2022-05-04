@@ -30,6 +30,7 @@ class DogController extends Controller
         $dogs = Dog::query ()
                 ->paginate (10);
 
+
         return view ('admin.dogs.index', compact ('dogs'));
     }
 

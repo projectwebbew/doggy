@@ -14,7 +14,7 @@ class HomesController extends Controller
             $dogs = Dog::query ()
                 ->filter($dogFilter)
                 ->paginate (6);
-            return view ('header', ['dogs' => $dogs]);
+            return view ('content', ['dogs' => $dogs]);
     }
 
     public function create ()
@@ -64,7 +64,7 @@ class HomesController extends Controller
     }
     public function cart()
     {
-        return view('basket.basket');
+        return view('basket.basket_page');
     }
     public function addToCart($id)
     {

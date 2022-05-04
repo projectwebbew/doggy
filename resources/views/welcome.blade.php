@@ -14,6 +14,9 @@
     <link rel="stylesheet" href="{{ asset ('css/app.css') }}">
     <link rel="stylesheet" href="{{asset ('css/custom.css')}}">
 
+    {{--Icons--}}
+    <link rel="stylesheet" href="{{asset('fontello-b5658897/css/fontello.css')}}">
+
 </head>
 <body>
 
